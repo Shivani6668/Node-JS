@@ -17,6 +17,14 @@ const PersonSchema = new mongoose.Schema({
         unique:true,
         require:true
     },
+    username:{
+        type:String,
+        require:true,
+    },
+    password:{
+        type:String,
+        require:true
+    }
 })
 
 const person = mongoose.model('Person',PersonSchema)

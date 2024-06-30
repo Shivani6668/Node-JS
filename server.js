@@ -13,13 +13,20 @@ if(cluster.isPrimary){
     const PORT = process.env.PORT
     const DB = require('./DB')
     const bodyparser = require('body-parser')
+    const passport = require("./Auth")
     const person = require('./Routes/PersonRoute')
+    
+    const personModel = require('./Model/PersonModel')
 
     app.use(bodyparser.json())
 
-    app.use("/person",person)
 
-    app.get("/",(req,res)=>{
+app.use(passport.initialize())
+const LocalStrategy = passport.authenticate('local',{session:false})
+
+    app.use("/person",LocalStrategy,person)
+
+    app.get("/",LocalStrategy,(req,res)=>{
       return res.json({message:`Welcome to our node js application using loadbalancer process id is ${process.pid}`})
     })
     
