@@ -11,7 +11,7 @@ if(cluster.isPrimary){
     const app = express()
     require("dotenv").config()
     const PORT = process.env.PORT
-
+    const DB = require('./DB')
     app.get("/",(req,res)=>{
       return res.json({message:`Welcome to our node js application using loadbalancer process id is ${process.pid}`})
     })
